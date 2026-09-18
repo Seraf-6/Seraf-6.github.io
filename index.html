@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Juan · Mi CV Personal</title>
+  <meta name="color-scheme" content="light">
+  <title>Juan · Profe de matemática</title>
 
-  <!-- Tungsten no está en Google Fonts: uso Oswald, la más parecida (condensada y firme) -->
+  <!-- Tungsten no está en Google Fonts: uso Oswald, la más parecida -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
@@ -13,9 +14,10 @@
   <style>
     /* ---------- Colores y base ---------- */
     :root {
-      --fondo: #1A477E;      /* color prestado de Wikipedia */
-      --papel: #061429;      /* fondo del cartel */
-      --tinta: #0a0a0a;
+      color-scheme: light;
+      --fondo: #72777d;      /* color prestado de Wikipedia */
+      --papel: #f2efe8;      /* fondo de los carteles */
+      --tinta: #0a0a0a;      /* texto de los carteles */
       --verde: #21b039;
     }
 
@@ -30,7 +32,7 @@
       font-weight: 300;
       font-size: 1.15rem;
       line-height: 1.6;
-      overflow-x: hidden; /* evita scroll lateral por el cartel inclinado */
+      overflow-x: hidden; /* evita scroll lateral por los carteles inclinados */
     }
 
     .pagina {
@@ -38,7 +40,7 @@
       margin: 0 auto;
     }
 
-    /* ---------- Cartel (foto + nombre + qué hago) ---------- */
+    /* ---------- Cartel (se usa en los dos) ---------- */
     .cartel {
       background: var(--papel);
       color: var(--tinta);
@@ -52,17 +54,32 @@
       transform-origin: center center;
     }
 
-    .cartel h1 {
+    .cartel h1,
+    .cartel h2 {
       font-size: 24px;       /* tamaño de título prestado de Wikipedia */
       font-weight: 700;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+      color: var(--tinta);
       margin: 1.5rem 0 0.2rem;
     }
 
     .cartel .oficio {
       margin: 0 0 1rem;
+      min-height: 1.6em;     /* reserva el espacio mientras se escribe */
       font-weight: 500;
+      color: var(--tinta);
+    }
+
+    /* Cursor que parpadea mientras se escribe (lo activa el JavaScript) */
+    .oficio.escribiendo::after {
+      content: "|";
+      margin-left: 2px;
+      animation: parpadeo 0.7s steps(1) infinite;
+    }
+
+    @keyframes parpadeo {
+      50% { opacity: 0; }
     }
 
     /* Tamaño de la foto (aparte, para no tocar el CSS del portafotos) */
@@ -95,16 +112,62 @@
       margin: 0 0 1.2rem;
     }
 
-    /* ---------- Contacto ---------- */
-    .contacto {
-      margin-top: 2rem;
-      padding-top: 1.2rem;
-      border-top: 2px solid var(--tinta);
-      font-weight: 500;
+    /* ---------- Cartel de redes ---------- */
+    .cartel-redes {
+      margin-top: 2.5rem;
+      padding-bottom: 1.6rem;
     }
 
-    .contacto a {
-      color: #fff;
+    .cartel-redes h2 {
+      margin-top: 0;
+    }
+
+    .redes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .redes a {
+      background: var(--tinta);
+      color: var(--papel);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border: 2px solid var(--tinta);
+      transition: background 0.2s, color 0.2s, translate 0.2s;
+    }
+
+    .redes a:hover,
+    .redes a:focus-visible {
+      background: var(--verde);
+      color: var(--tinta);
+      translate: 0 -4px;
+    }
+
+    /* ---------- Animación: los carteles aparecen desde abajo ---------- */
+    /* Uso "translate" y no "transform" para no pisar la inclinación del cartel */
+    @keyframes aparecer {
+      from { opacity: 0; translate: 0 30px; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+
+    .cartel {
+      animation: aparecer 0.8s ease-out backwards;
+    }
+
+    .cartel-redes {
+      animation-delay: 0.3s;
+    }
+
+    /* Si alguien tiene desactivadas las animaciones en su equipo, se respetan */
+    @media (prefers-reduced-motion: reduce) {
+      .cartel { animation: none; }
+      .redes a { transition: none; }
     }
 
     /* ---------- Celular ---------- */
@@ -122,7 +185,7 @@
     <header class="cartel">
       <img class="foto" src="foto.jpg" alt="Foto de Juan">
       <h1>Juan</h1>
-      <p class="oficio">Me dedico a enseñar matemática</p>
+      <p class="oficio">Enseño matemática</p>
     </header>
 
     <!-- Sobre mí -->
@@ -144,13 +207,49 @@
       </p>
     </section>
 
-    <!-- Contacto -->
-    <footer class="contacto">
-      <!-- Cuando sepas la red, cambialo por: <a href="https://...">@seraf6</a> -->
-      Contacto: @seraf6
+    <!-- Cartel de contacto -->
+    <footer class="cartel cartel-redes">
+      <h2>Contacto: @seraf6</h2>
+      <nav class="redes">
+        <!-- Cambiá cada link por el tuyo, o borrá las redes que no uses -->
+        <a href="https://instagram.com/seraf6" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://x.com/seraf6" target="_blank" rel="noopener">X</a>
+        <a href="https://tiktok.com/@seraf6" target="_blank" rel="noopener">TikTok</a>
+      </nav>
     </footer>
-<a href="https://www.instagram.com/serafini6">Mi Insta</a>
-    
+
   </main>
+
+  <!-- Animación: la línea "Enseño matemática" se escribe letra por letra -->
+  <script>
+    const linea = document.querySelector('.oficio');
+    const texto = linea.textContent;
+    const velocidad = 70;   // milisegundos entre letra y letra
+    const espera = 900;     // milisegundos antes de empezar (deja que aparezca el cartel)
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Si la persona tiene las animaciones desactivadas, dejamos el texto completo
+    if (!sinMovimiento) {
+      let letras = 0;
+      linea.textContent = '';
+      linea.classList.add('escribiendo');
+
+      function escribir() {
+        letras++;
+        linea.textContent = texto.slice(0, letras);
+
+        if (letras < texto.length) {
+          setTimeout(escribir, velocidad);
+        } else {
+          // Termina: el cursor sigue un rato y después desaparece
+          setTimeout(function () {
+            linea.classList.remove('escribiendo');
+          }, 1500);
+        }
+      }
+
+      setTimeout(escribir, espera);
+    }
+  </script>
 </body>
 </html>

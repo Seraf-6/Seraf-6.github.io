@@ -1,1 +1,155 @@
-<h1> Pagina web en construcción </h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juan · Profe de matemática</title>
+
+  <!-- Tungsten no está en Google Fonts: uso Oswald, la más parecida (condensada y firme) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- Colores y base ---------- */
+    :root {
+      --fondo: #72777d;      /* color prestado de Wikipedia */
+      --papel: #f2efe8;      /* fondo del cartel */
+      --tinta: #0a0a0a;
+      --verde: #21b039;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 2.5rem 1.5rem;
+      background: var(--fondo);
+      color: #fff;
+      font-family: 'Tungsten', 'Oswald', sans-serif;
+      font-weight: 300;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      overflow-x: hidden; /* evita scroll lateral por el cartel inclinado */
+    }
+
+    .pagina {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ---------- Cartel (foto + nombre + qué hago) ---------- */
+    .cartel {
+      background: var(--papel);
+      color: var(--tinta);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      box-shadow: 14px 14px 0 #0a0a0a, 22px 22px 50px rgba(0, 0, 0, 0.7);
+      margin-bottom: 2.5rem;
+      margin-right: -4rem;
+      padding-bottom: 0.8rem;
+      transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
+      transform-origin: center center;
+    }
+
+    .cartel h1 {
+      font-size: 24px;       /* tamaño de título prestado de Wikipedia */
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.2rem;
+    }
+
+    .cartel .oficio {
+      margin: 0 0 1rem;
+      font-weight: 500;
+    }
+
+    /* Tamaño de la foto (aparte, para no tocar el CSS del portafotos) */
+    img.foto {
+      display: block;
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      margin: 0.5rem auto 0;
+    }
+
+    /* Portafotos: Doble marco */
+    img.foto {
+      border-radius: 50%;
+      outline: 2px solid #21b039;
+      outline-offset: 6px;
+    }
+
+    /* Efecto: Se colorea (al pasar el mouse) */
+    img.foto {
+      filter: grayscale(1);
+      transition: filter 0.4s;
+    }
+    img.foto:hover {
+      filter: none;
+    }
+
+    /* ---------- Sobre mí ---------- */
+    .sobre-mi p {
+      margin: 0 0 1.2rem;
+    }
+
+    /* ---------- Contacto ---------- */
+    .contacto {
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 2px solid var(--tinta);
+      font-weight: 500;
+    }
+
+    .contacto a {
+      color: #fff;
+    }
+
+    /* ---------- Celular ---------- */
+    @media (max-width: 600px) {
+      body { padding: 1.5rem 1rem; }
+      .cartel { margin-right: 0; } /* el margen negativo se salía de la pantalla */
+    }
+  </style>
+</head>
+
+<body>
+  <main class="pagina">
+
+    <!-- Cartel principal -->
+    <header class="cartel">
+      <img class="foto" src="foto.jpg" alt="Foto de Juan">
+      <h1>Juan</h1>
+      <p class="oficio">Enseño matemática</p>
+    </header>
+
+    <!-- Sobre mí -->
+    <section class="sobre-mi">
+      <p>
+        Soy Juan y me dedico a enseñar matemática. Me gusta que las cosas se
+        entiendan de verdad, no que se memoricen para el examen y se olviden
+        a la semana.
+      </p>
+      <p>
+        Creo que casi todo el mundo puede llevarse bien con los números si
+        alguien se los explica con paciencia y con ejemplos de la vida real.
+        Mi trabajo es encontrar la forma de explicarlo que a cada persona
+        le sirva.
+      </p>
+      <p>
+        Si querés charlar sobre clases, dudas o cualquier tema de matemática,
+        escribime.
+      </p>
+    </section>
+
+    <!-- Contacto -->
+    <footer class="contacto">
+      <!-- Cuando sepas la red, cambialo por: <a href="https://...">@seraf6</a> -->
+      Contacto: @seraf6
+    </footer>
+
+  </main>
+</body>
+</html>
